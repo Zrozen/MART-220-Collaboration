@@ -4,7 +4,7 @@ let y= 0;
 
 function setup ()
 {
-    bg = loadImage('Vlad_Images/Church10241024.jpg');
+    bg = loadImage('../Assets/Vlad_Images/Church10241024.png');
     createCanvas(1024,1024);
 }
 
