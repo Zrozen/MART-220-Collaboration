@@ -2,14 +2,27 @@
 var myAnimation;
 var animations = [];
 var i = 0;
+
 //ducky movement/animation vars
-var duckyX = 100;
-var duckyY = 100;
+var duckyX = 400;
+var duckyY = 400;
 
 //tub stuff
 var tubObject;
+
 //bubbles
 var myBubbles = [];
+
+//bubble movement
+var bubbleSpeedX= 5
+var bubbleSpeedY= 5
+
+
+//timer
+let timer = 20
+let state= true
+let startTime;
+
 
 
 //preload images
@@ -33,10 +46,13 @@ function setup()
     createCanvas(800,600);
 
     //bubbles
-    for(var b = 0; b < 200; b++)
+    for(var b = 0; b < 20; b++)
     {
-        myBubbles[b] = new bubbleShape(random(50,750),random(600,300),random(10,50), random(255), random(255),random(255)); 
+        myBubbles[b] = new bubbleShape(random(50,750),random(600,300),random(10,50), random(255), random(255),random(255));   
     }
+
+    //bubbles random movement
+ 
 
     //duck shapes
     myAnimation = new animationImages(duckyFront,duckyX,duckyY);
@@ -96,15 +112,19 @@ function draw()
    //intro-title
   
    textFont(duckyFonts);
-   textSize(75);
-   fill('blue');
-   text('Bubble Ducky!', 90,100);
-   textSize(75);
-   fill('white');
-   text('Bubble Ducky!',100,100);
+   //textSize(75);
+  // fill('blue');
+   //text('Bubble Ducky!', 90,100);
+   //textSize(75);
+   //fill('white');
+   //text('Bubble Ducky!',100,100);
 
    
   
+    //bubbles  RANDOM MOVEMENT
+    
+
+    
     //bubbles  EATING/DRAWING
     fill('white');
     for (var b = 0; b < myBubbles.length; b++) 
@@ -112,14 +132,50 @@ function draw()
         var bubble = myBubbles[b];
 
         if (dist(duckyX, duckyY, bubble.x, bubble.y) > 50)  
-        {
-            bubble.draw(); //draw bubble if not touching
-        }
+
+       {
+          bubble.draw(); //draw bubble if not touching
+       }
     }
 
+    //bubble movement
+    for (var b = 0; b < myBubbles.length; b++) 
+    {
+        myBubbles[b].updatePositionRandomly();
+        myBubbles[b].draw();
+    }
+    
+    
+   
 
     //duck shapes
     animations[i].drawAnimation();
+
+    //timer
+    square()
+    textAlign(CENTER, CENTER);
+    textSize(25);
+    text('Eat all the bubbles', 400,50);
+    text('before the time runs out!',400,100);
+    
+    ellipse(650,75,100);
+
+    textSize(75);
+    fill('blue');
+    text(timer, 650, 75);
+    if (frameCount % 60 == 0 && timer > 0) 
+    { 
+        timer --;
+    }
+
+    //bubble counter
+    fill('white');
+    rect(25,25,150,200);
+    fill('blue');
+    textSize(25);
+    text('bubble',90,50);
+    text('counter:',90,75);
+
   
 }
 

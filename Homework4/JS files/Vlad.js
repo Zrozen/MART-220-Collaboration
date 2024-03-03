@@ -29,11 +29,11 @@ function setup ()
 
     setInterval(doSomething, 1000) 
 
-    lightFollower = 
+ lightFollower = 
     {
-        x: width / 2,
-        y: height / 2,
-        speed: 0.02
+     x: width / 2,
+      y: height / 2,
+       speed: 0.02
     }
 
     startTime = millis();
