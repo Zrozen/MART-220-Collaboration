@@ -1,8 +1,9 @@
 //ducky idle animation
 var myAnimation = [];
 var animations = [];
-var i = 0;
-var j = 0;
+var i = 0; //ducky animation var
+var j = 0; //ducky UPDATE animation var
+
 
 var idlePaths = [];
 
@@ -15,6 +16,7 @@ var tubObject;
 
 //bubbles
 var myBubbles = [];
+let collisionCount = 0;
 
 //bubble movement
 var bubbleSpeedX= 5
@@ -51,7 +53,7 @@ function setup()
     createCanvas(800,600);
 
     //bubbles
-    for(var b = 0; b < 20; b++)
+    for(var b = 0; b < 50; b++)
     {
         myBubbles[b] = new bubbleShape(random(50,750),random(600,300),random(10,50), random(255), random(255),random(255));   
     }
@@ -130,37 +132,33 @@ function draw()
    //textSize(75);
    //fill('white');
    //text('Bubble Ducky!',100,100);
-
    
-  
-    //bubbles  RANDOM MOVEMENT
-    
-
-    
-    //bubbles  EATING/DRAWING
-    fill('white');
-    for (var b = 0; b < myBubbles.length; b++) 
-    {
-        var bubble = myBubbles[b];
-
-        if (dist(duckyX, duckyY, bubble.x, bubble.y) > 50)  
-
-       {
-          bubble.draw(); //draw bubble if not touching
-       }
-    }
 
     //bubble movement
+    fill('white');
     for (var b = 0; b < myBubbles.length; b++) 
     {
         myBubbles[b].updatePositionRandomly();
         myBubbles[b].draw();
+    }
+
+    //bubble check collision
+
+    for (var b = 0; b < myBubbles.length; b++) {
+        var bubble = myBubbles[b];
+        if (duckyX < bubble.x + bubble.diameter &&
+            duckyX + animations[i].width > bubble.x &&
+            duckyY < bubble.y + bubble.diameter &&
+            duckyY + animations[i].height > bubble.y) {
+            collisionCount++;
+        }
     }
     
     
    
 
     //duck shapes
+    animations[i].updatePosition(duckyX, duckyY);
     animations[i].drawAnimation();
 
 
@@ -188,6 +186,8 @@ function draw()
     textSize(25);
     text('bubble',90,50);
     text('counter:',90,75);
+    textSize(75);
+    text(collisionCount,90,150);
 
   
 }
