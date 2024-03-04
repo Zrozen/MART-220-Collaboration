@@ -1,7 +1,10 @@
 //ducky idle animation
-var myAnimation;
+var myAnimation = [];
 var animations = [];
 var i = 0;
+var j = 0;
+
+var idlePaths = [];
 
 //ducky movement/animation vars
 var duckyX = 400;
@@ -28,6 +31,8 @@ let startTime;
 //preload images
 function preload()
 {
+    idlePaths = loadStrings("Assets/Ducky Images/idle.txt");
+
     //background image
     backgroundTile = loadImage('Assets/Ducky Images/BathroomTile.jpg');
 
@@ -55,18 +60,25 @@ function setup()
  
 
     //duck shapes
-    myAnimation = new animationImages(duckyFront,duckyX,duckyY);
-    animations[0] = myAnimation;
-    myAnimation = new animationImages(duckySideLeft,duckyX,duckyY);
-    animations[1] = myAnimation;
-    myAnimation = new animationImages(duckyFront,duckyX,duckyY);
-    animations[2] = myAnimation;
-    myAnimation = new animationImages(duckySideRight,duckyX,duckyY);
-    animations[3] = myAnimation;
-    myAnimation = new animationImages(duckyFront,duckyX,duckyY);
-    animations[4] = myAnimation;
-    myAnimation = new animationImages(duckySideLeft);
-
+    for(var i = 0; i < idlePaths.length; i++)
+    {   
+    myAnimation = new animationImages(idlePaths[i],duckyX,duckyY);
+    animations[i] = myAnimation;
+    }
+    //duck shapes
+    //myAnimation = new animationImages(duckyFront,duckyX,duckyY);
+    //animations[0] = myAnimation;
+    //myAnimation = new animationImages(duckySideLeft,duckyX,duckyY);
+    //animations[1] = myAnimation;
+   // myAnimation = new animationImages(duckyFront,duckyX,duckyY);
+   // animations[2] = myAnimation;
+   // myAnimation = new animationImages(duckySideRight,duckyX,duckyY);
+    //animations[3] = myAnimation;
+   // myAnimation = new animationImages(duckyFront,duckyX,duckyY);
+    //animations[4] = myAnimation;
+    //myAnimation = new animationImages(duckySideLeft);
+    
+   
    
    
     //how often animations shift
@@ -151,6 +163,7 @@ function draw()
     //duck shapes
     animations[i].drawAnimation();
 
+
     //timer
     square()
     textAlign(CENTER, CENTER);
@@ -211,7 +224,10 @@ function keyPressed()
         duckyX += 10;
     }
 
-    animations[i].updatePosition(duckyX, duckyY);
+    for(var j = 0; j < animations.length; j++)
+    {
+        animations[j].updatePosition(duckyX, duckyY);
+    }
 }
 
 

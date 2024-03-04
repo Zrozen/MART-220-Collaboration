@@ -1,8 +1,8 @@
 class animationImages
 {
-    constructor(fileName,x,y)
+    constructor(path,x,y)
     {
-        this.fileName = fileName;
+        this.path = path;
         this.x = x;
         this.y = y;
         this.speed = 5;
@@ -10,7 +10,7 @@ class animationImages
 
     drawAnimation()
     {
-        image(this.fileName,this.x,this.y)
+        image(this.path,this.x,this.y)
     }
 
     //duck movement update
@@ -19,6 +19,7 @@ class animationImages
         this.x = duckyX;
         this.y = duckyY;
     }
+
 
     
 }

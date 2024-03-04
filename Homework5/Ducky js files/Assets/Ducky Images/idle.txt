@@ -1,0 +1,6 @@
+Assets/Ducky Images/Ducky9696.png
+Assets/Ducky Images/DuckySideLeft.png
+Assets/Ducky Images/Ducky9696.png
+Assets/Ducky Images/DuckySideRight.png
+Assets/Ducky Images/Ducky9696.png
+Assets/Ducky Images/DuckySideLeft.png
