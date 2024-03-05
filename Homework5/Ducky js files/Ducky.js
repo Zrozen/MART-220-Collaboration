@@ -3,6 +3,7 @@ var myAnimation = [];
 var animations = [];
 var i = 0; //ducky animation var
 var j = 0; //ducky UPDATE animation var
+ //collision detection
 
 
 var idlePaths = [];
@@ -53,7 +54,7 @@ function setup()
     createCanvas(800,600);
 
     //bubbles
-    for(var b = 0; b < 50; b++)
+    for(var b = 0; b < 10; b++)
     {
         myBubbles[b] = new bubbleShape(random(50,750),random(600,300),random(10,50), random(255), random(255),random(255));   
     }
@@ -144,16 +145,20 @@ function draw()
 
     //bubble check collision
 
+
+
     for (var b = 0; b < myBubbles.length; b++) {
         var bubble = myBubbles[b];
+
         if (duckyX < bubble.x + bubble.diameter &&
-            duckyX + animations[i].width > bubble.x &&
+            duckyX + animations[i].x > bubble.x &&
             duckyY < bubble.y + bubble.diameter &&
-            duckyY + animations[i].height > bubble.y) {
+            duckyY + animations[i].y > bubble.y) {
             collisionCount++;
         }
     }
-    
+
+    console.log("Collision count: " + collisionCount);
     
    
 
