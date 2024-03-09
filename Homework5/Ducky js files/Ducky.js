@@ -8,6 +8,12 @@ var j = 0; //ducky UPDATE animation var
 
 var idlePaths = [];
 
+//loofahs
+var pinkLoofah;
+var greenLoofah;
+var purpleLoofah;
+var myLoofahs =[];
+
 //ducky movement/animation vars
 var duckyX = 400;
 var duckyY = 400;
@@ -29,6 +35,12 @@ let timer = 20
 let state= true
 let startTime;
 
+//sounds
+
+var bubbleSound;
+var backgroundSound;
+var chompSound;
+
 
 
 //preload images
@@ -42,11 +54,20 @@ function preload()
     // duck animation images
     duckyFront = loadImage('Assets/Ducky Images/Ducky9696.png');
     duckySideLeft = loadImage('Assets/Ducky Images/DuckySideLeft.png');
-    duckySideRight = loadImage('Assets/Ducky Images/DuckySideRight.png');
+    duckySideRight = loadImage('Assets/Ducky Images/DuckySideRight.png')
+    
+    // loofah images
+    loofahPink = loadImage('Assets/Ducky Images/Loofahs/loofah pink.png');
+    loofahGreen = loadImage('Assets/Ducky Images/Loofahs/loofah green.png');
+    loofahPurple = loadImage('Assets/Ducky Images/Loofahs/loofah purple.png')
     
     // font
-
     duckyFonts = loadFont('Assets/Ducky Font/Copyduck.otf');
+
+    // sounds
+    squeakSound = loadSound('Assets/Ducky Sounds/Squeak.wav');
+    backgroundSound = loadSound('Assets/Ducky Sounds/Background Music.wav');
+    chompSound = loadSound('Assets/Ducky Sounds/Chomp.wav');
 }
 
 function setup()
@@ -54,13 +75,21 @@ function setup()
     createCanvas(800,600);
 
     //bubbles
-    for(var b = 0; b < 10; b++)
+    for(var b = 0; b < 75; b++)
     {
         myBubbles[b] = new bubbleShape(random(50,750),random(600,300),random(10,50), random(255), random(255),random(255));   
     }
 
-    //bubbles random movement
- 
+    //loofahs
+    for(var l = 0; l < 5; l++)
+    {
+        myLoofahs[l]= new loofahShape(loofahPink, random(width), random(height), 96);
+        
+    }
+    //pinkLoofah = new loofahShape(loofahPink,300,300);
+    //greenLoofah = new loofahShape(loofahGreen,400,400);
+    //purpleLoofah = new loofahShape(loofahPurple,200,200);
+   
 
     //duck shapes
     for(var i = 0; i < idlePaths.length; i++)
@@ -94,6 +123,21 @@ function setup()
     tubObjectRightSide = new tubShape(750,300,50,600,'white');
 
 }
+
+ //sounds
+ function mousePressed()
+ {
+     //backgroundSound.loop();
+
+     if(backgroundSound.isPlaying())
+     {
+        backgroundSound.pause();
+     }
+     else
+     {
+        backgroundSound.play();
+     }
+ }
 
 
 
@@ -134,7 +178,32 @@ function draw()
    //fill('white');
    //text('Bubble Ducky!',100,100);
    
+    //loofah shapes
+    for(var l = 0; l < myLoofahs.length; l++)
+    {
+        myLoofahs[l].updatePositionRandomly();
+        myLoofahs[l].drawImage();
+    }
 
+    //loofah eating
+    for (var l = 0; l < myLoofahs.length; l++) 
+    {
+        var loofah = myLoofahs[l];
+
+        if(duckyX < loofah.x + loofah.diameter &&
+            duckyX + animations[i].x > loofah.x &&
+            duckyY < loofah.y + loofah.diameter &&
+            duckyY + animations[i].y > loofah.y)
+            {
+                myLoofahs.splice(l,1);
+                collisionCount--;
+                
+                squeakSound.play();
+            }
+    }
+
+   
+   
     //bubble movement
     fill('white');
     for (var b = 0; b < myBubbles.length; b++) 
@@ -155,10 +224,16 @@ function draw()
             duckyY < bubble.y + bubble.diameter &&
             duckyY + animations[i].y > bubble.y) {
             collisionCount++;
+            myBubbles.splice(b,1);
+
+            chompSound.play();
         }
     }
 
-    console.log("Collision count: " + collisionCount);
+    //console.log("Collision count: " + collisionCount);
+
+   
+
     
    
 
@@ -194,6 +269,7 @@ function draw()
     textSize(75);
     text(collisionCount,90,150);
 
+    
   
 }
 

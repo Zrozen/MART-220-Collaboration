@@ -1,0 +1,3 @@
+Assets/Loofahs/loofah green.png
+Assets/Loofahs/loofah pink.png
+Assets/Loofahs/loofah purple.png
