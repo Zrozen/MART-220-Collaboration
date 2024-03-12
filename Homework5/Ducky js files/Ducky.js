@@ -191,9 +191,9 @@ function draw()
         var loofah = myLoofahs[l];
 
         if(duckyX < loofah.x + loofah.diameter &&
-            duckyX + animations[i].x > loofah.x &&
+            duckyX + 96 > loofah.x &&
             duckyY < loofah.y + loofah.diameter &&
-            duckyY + animations[i].y > loofah.y)
+            duckyY + 96 > loofah.y)
             {
                 myLoofahs.splice(l,1);
                 collisionCount--;
