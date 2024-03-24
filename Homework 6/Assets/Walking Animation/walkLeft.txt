@@ -1,0 +1,4 @@
+Assets/Walking Animation/walk left(1).png
+Assets/Walking Animation/walk left(2).png
+Assets/Walking Animation/walk left(3).png
+Assets/Walking Animation/walk left(2).png
