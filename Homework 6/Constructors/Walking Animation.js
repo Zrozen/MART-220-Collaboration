@@ -3,17 +3,16 @@ class animationImage
 {
     constructor(x,y,w,h)
     {
-        //this.fileNames = fileNames;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.imageObjects = [];
+        //this.imageObjects = [];
         this.currentAnimation;
         this.createAnimation();
         //this.loadAnimation();
-        this.i = 0;
-        this.currentFrameCount = 0;
+        //this.i = 0;
+        //this.currentFrameCount = 0;
         this.direction = "";
     }
 
@@ -34,12 +33,14 @@ class animationImage
 
     createAnimation()
     {
-        this.currentAnimation = createSprite(this.x, this.y, this.w, this.h);
+        this.currentAnimation = createSprite(this.x, this.y);
     }
 
     loadAnimation(animationType, fileNames)
     {
-        this.currentAnimaiton.addAnimation(animaitonType, fileNames[0], fileNames[fileNames.length - 1]);
+        this.currentAnimaiton.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
+        this.currentAnimation.width;
+        this.currentAnimation.height;
     }
 
    // setAnimation(animationType, fileNames)
@@ -111,6 +112,11 @@ class animationImage
     updatePosition()
     {
         this.direction = direction;
+    }
+
+    isColliding(myImage)
+    {
+        return this.currentAnimation.collide(myImage);
     }
 
     
