@@ -38,9 +38,9 @@ class animationImage
 
     loadAnimation(animationType, fileNames)
     {
-        this.currentAnimaiton.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
-        this.currentAnimation.width;
-        this.currentAnimation.height;
+        this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
+        this.currentAnimation.width = 300;
+        this.currentAnimation.height = 150;
     }
 
    // setAnimation(animationType, fileNames)
